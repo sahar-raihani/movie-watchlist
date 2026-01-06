@@ -1,14 +1,31 @@
 import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [movies, setMovies] = useState([]);
+
+  function addMovie() {
+    const newMovie = {
+      id: Date.now().toString(),
+      title: "Inception",
+      genre: "Action",
+      watched: false,
+    };
+    setMovies([...movies, newMovie]);
+    }
 
   return (
     <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>
-        Increase
+      <button onClick={addMovie}>
+        Add Movie
       </button>
+
+      <ul>
+        {movies.map((movie) => (
+          <li key={movie.id}>
+            {movie.title} - {movie.genre}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
